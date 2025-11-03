@@ -28,7 +28,7 @@ export default function Home() {
   }, [])
 
   return (
-    <div>
+    <div className={styles.home}>
       <div className={styles.header}>
           <img src={logo} alt="logo" className={styles.logo} />
           <h1 className={styles.title}>Gittes</h1>
