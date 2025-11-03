@@ -22,19 +22,16 @@ export default function Nav() {
       </div>
 
       {/* Mobile Burger Button */}
-      <button className={styles.burger} onClick={() => setMenuOpen(!menuOpen)}>
-        <FaBars />
+      <button 
+        className={`${styles.burger} ${menuOpen ? styles.burgerActive : ''}`} 
+        onClick={() => setMenuOpen(!menuOpen)}
+      >
+        {menuOpen ? <FaTimes /> : <FaBars />}
       </button>
 
       {/* Mobile Menu */}
       {menuOpen && (
         <div className={styles.mobileMenu}>
-          <button
-            className={styles.closeBtn}
-            onClick={() => setMenuOpen(false)}
-          >
-            <FaTimes />
-          </button>
           <Link to="/" onClick={() => setMenuOpen(false)}>
             Hjem
           </Link>

@@ -1,28 +1,339 @@
 .home{
-    width: 500px;
+    max-width: 500px;
     margin: 0 auto;
     box-sizing: border-box;
     padding: 0;
 }
-.logo{
-    height: 80px;
-    width: 80px;
-    object-fit: cover;
+
+.header {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 2rem;
 }
+
+.header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(71, 71, 71, 0.418);
+    z-index: 1;
+}
+
+.header > * {
+    position: relative;
+    z-index: 2;
+}
+
+.logo{
+    height: 120px;
+    width: 120px;
+    object-fit: cover;
+    margin-bottom: 1rem;
+    background: transparent;
+    border-radius: 50%;
+    padding: 10px;
+}
+
+.title, .subtitle {
+    color: white;
+    font-family: 'Zen Loop', cursive;
+    text-align: center;
+    margin: 0.5rem 0;
+    font-weight: 300;
+    letter-spacing: 2px;
+}
+
+.title {
+    font-size: 3rem;
+}
+
+.subtitle {
+    font-size: 3.5rem;
+    margin-bottom: 3rem;
+}
+
+.ctaButton {
+    background: transparent;
+    color: white;
+    border: 3px solid white;
+    padding: 1rem 4rem;
+    font-size: 1.5rem;
+    font-weight: 300;
+    letter-spacing: 3px;
+    border-radius: 50px 0 50px 0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.ctaButton:hover {
+    background: white;
+    color: #2a4f57;
+}
+
 .ophold{
-    width: 500px;
-    height: 1000px;
+    background-color: #2a4f57;
+    padding: 3rem 2rem;
+    display: flex;
+    flex-direction: column;
+    border-radius: 50px 0 50px 0;
+    align-items: center;
+    text-align: center;
+    margin-top: -50px;
+    position: relative;
+    z-index: 10;
+}
+
+.ophold h2 {
+    color: white;
+    font-size: 2.5rem;
+    font-weight: 300;
+    margin-bottom: 2rem;
+    line-height: 1.4;
 }
 
 .ophold p{
-    font-size: 20px;
+    color: white;
+    font-size: 1rem;
     text-align: center;
-    width: 450px;
+    max-width: 450px;
+    line-height: 1.8;
+    margin-bottom: 2rem;
 }
 
 .gitteOphold{
-    border-radius: 500px;
-    width: 300px;
-    height: 300px;
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
     object-fit: cover;
+    margin: 2rem 0;
+}
+
+.opholdButton {
+    background-color: #829B97;
+    color: white;
+    border: none;
+    padding: 0;
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+    border-radius: 50px 0 50px 0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    width: 280px;
+    height: 105px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.opholdButton:hover {
+    background: white;
+    color: #2a4f57;
+}
+
+.opholdButton p {
+    margin: 0;
+}
+
+/* Reviews Section */
+.reviews {
+    background-color: #d9d9d9;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: -50px;
+    padding-top: 100px;
+}
+
+.reviewsHeader {
+    display: none;
+}
+
+.reviewsGrid {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    width: 100%;
+    max-width: 400px;
+}
+
+.reviewCard {
+    background-color: #6b8e8a;
+    color: white;
+    padding: 2rem;
+    border-radius: 30px 0 30px 0;
+    text-align: center;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.headerCard {
+    background-color: #c9b591;
+    min-height: 150px;
+}
+
+.reviewTitle {
+    font-size: 3rem;
+    font-weight: 300;
+    line-height: 1.4;
+    margin: 0;
+    color: white;
+}
+
+.reviewName {
+    font-size: 2rem;
+    font-weight: 300;
+    margin: 0 0 0.2rem 0;
+}
+
+.stayType {
+    top: -20px;
+    font-size: 2rem;
+    font-weight: 300;
+    margin: 0 0 1rem 0;
+}
+
+.reviewText {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin: 0;
+    font-weight: 300;
+}
+
+/* Desktop Styles */
+@media (min-width: 768px) {
+    .home {
+        max-width: 90%;
+        width: 100%;
+    }
+
+    .header {
+        min-height: 80vh;
+        padding: clamp(2rem, 5vw, 4rem);
+    }
+
+    .logo {
+        height: clamp(120px, 15vw, 150px);
+        width: clamp(120px, 15vw, 150px);
+    }
+
+    .title {
+        font-size: clamp(3rem, 5vw, 4rem);
+    }
+
+    .subtitle {
+        font-size: clamp(3.5rem, 5.5vw, 4.5rem);
+        margin-bottom: 4rem;
+    }
+
+    .ctaButton {
+        padding: clamp(1rem, 2vw, 1.2rem) clamp(3rem, 6vw, 5rem);
+        font-size: clamp(1.5rem, 2vw, 1.8rem);
+    }
+
+    .ophold {
+        padding: clamp(3rem, 5vw, 5rem) clamp(2rem, 4vw, 4rem);
+        margin-top: clamp(-60px, -8vw, -80px);
+        border-radius: clamp(50px, 8vw, 80px) 0 clamp(50px, 8vw, 80px) 0;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .ophold h2 {
+        font-size: clamp(2.5rem, 4vw, 3.5rem);
+        width: 100%;
+        text-align: center;
+    }
+
+    .ophold p {
+        font-size: clamp(1rem, 1.5vw, 1.2rem);
+        max-width: 80%;
+        margin-bottom: 3rem;
+    }
+
+    .gitteOphold {
+        width: clamp(200px, 25vw, 300px);
+        height: clamp(200px, 25vw, 300px);
+        margin: 3rem 2rem;
+    }
+
+    .opholdButton {
+        width: clamp(280px, 35vw, 350px);
+        height: clamp(105px, 12vw, 120px);
+        font-size: clamp(1.2rem, 1.8vw, 1.4rem);
+    }
+
+    .reviews {
+        padding: clamp(2rem, 4vw, 4rem);
+        margin-top: clamp(-60px, -8vw, -80px);
+        padding-top: clamp(100px, 15vw, 150px);
+    }
+
+    .reviewsGrid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: clamp(1.5rem, 2vw, 2rem);
+        max-width: 90%;
+        width: 100%;
+    }
+
+    .reviewCard {
+        padding: clamp(2rem, 3vw, 2.5rem);
+        min-height: clamp(200px, 25vw, 250px);
+        border-radius: clamp(30px, 4vw, 40px) 0 clamp(30px, 4vw, 40px) 0;
+    }
+
+    .headerCard {
+        grid-column: 1 / -1;
+        min-height: clamp(150px, 18vw, 180px);
+    }
+
+    .reviewTitle {
+        font-size: clamp(3rem, 4vw, 3.5rem);
+    }
+
+    .reviewName {
+        font-size: clamp(2rem, 2.5vw, 2.2rem);
+    }
+
+    .stayType {
+        font-size: clamp(2rem, 2.5vw, 2.2rem);
+    }
+
+    .reviewText {
+        font-size: clamp(0.95rem, 1.3vw, 1.1rem);
+        line-height: 1.7;
+    }
+}
+
+/* Large Desktop */
+@media (min-width: 1200px) {
+    .home {
+        max-width: 1400px;
+    }
+
+    .reviewsGrid {
+        max-width: 1200px;
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .headerCard {
+        grid-column: 1 / 2;
+    }
 }
