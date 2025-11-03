@@ -13,8 +13,8 @@ console.log('Media College Viborg')
 console.log('Seeding files')
 console.log('----------------------\n')
 
-// await seedUsers();
-// await seedActivities();
+await seedUsers();
+await seedActivities();
 await seedReviews();
 await seedStays();
 await seedContacts();
