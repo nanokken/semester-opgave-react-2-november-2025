@@ -1,0 +1,892 @@
+{
+	"info": {
+		"_postman_id": "aa9b1203-97cb-43af-998d-2e013ba4493d",
+		"name": "MCD - Glamping - v3",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "38584738",
+		"_collection_link": "https://mcdmviborg.postman.co/workspace/webmcdm.dk---Server-Projects~f1ca1e4d-4cb3-49f6-9664-7a010d498024/collection/38584738-aa9b1203-97cb-43af-998d-2e013ba4493d?action=share&source=collection_link&creator=38584738"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Users",
+					"item": [
+						{
+							"name": "Get Users",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{server_path}}/users",
+									"host": [
+										"{{server_path}}"
+									],
+									"path": [
+										"users"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "User",
+					"item": [
+						{
+							"name": "Add User",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "A",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "testss",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "and@mediacollege.dk",
+											"type": "text"
+										},
+										{
+											"key": "file",
+											"type": "file",
+											"src": "/C:/MCDM_Arsenalet/One Day Viborg/materialer/Moments/2024 Jamal/image003.jpg"
+										},
+										{
+											"key": "role",
+											"value": "guest",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{server_path}}/user",
+									"host": [
+										"{{server_path}}"
+									],
+									"path": [
+										"user"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update User",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "id",
+											"value": "66effe31a7b34ac1c6e0bef7",
+											"type": "text"
+										},
+										{
+											"key": "name",
+											"value": "Jensssss",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "anders@mediacollege.dk",
+											"type": "text"
+										},
+										{
+											"key": "file",
+											"type": "file",
+											"src": "/C:/MCDM_Arsenalet/One Day Viborg/materialer/34-amalie-rosbjerg.jpg"
+										},
+										{
+											"key": "password",
+											"value": "1234",
+											"type": "text"
+										},
+										{
+											"key": "role",
+											"value": "guest",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{server_path}}/user",
+									"host": [
+										"{{server_path}}"
+									],
+									"path": [
+										"user"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete User",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{server_path}}/user/68aeea7ef5d52f4b27d9a9a8",
+									"host": [
+										"{{server_path}}"
+									],
+									"path": [
+										"user",
+										"68aeea7ef5d52f4b27d9a9a8"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get User ID",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{server_path}}/user/66effb1da10706c4e24607ef",
+									"host": [
+										"{{server_path}}"
+									],
+									"path": [
+										"user",
+										"66effb1da10706c4e24607ef"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "SignIn",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\" : \"admin@mediacollege.dk\",\r\n    \"password\" : \"admin\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{server_path}}/auth/signin",
+							"host": [
+								"{{server_path}}"
+							],
+							"path": [
+								"auth",
+								"signin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Token Check",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{server_path}}/auth/token",
+							"host": [
+								"{{server_path}}"
+							],
+							"path": [
+								"auth",
+								"token"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Reviews",
+			"item": [
+				{
+					"name": "Reviews",
+					"item": [
+						{
+							"name": "Reviews",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{server_path}}/reviews",
+									"host": [
+										"{{server_path}}"
+									],
+									"path": [
+										"reviews"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Review",
+					"item": [
+						{
+							"name": "Post Review",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "review",
+											"value": "test description uden",
+											"type": "text"
+										},
+										{
+											"key": "age",
+											"value": "22",
+											"type": "text"
+										},
+										{
+											"key": "name",
+											"value": "Wilbeck",
+											"type": "text"
+										},
+										{
+											"key": "file",
+											"type": "file",
+											"src": "/C:/MCDM_Arsenalet/One Day Viborg/materialer/Willbeck.jpg"
+										},
+										{
+											"key": "stay",
+											"value": "Romantisk Getaway",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{server_path}}/review",
+									"host": [
+										"{{server_path}}"
+									],
+									"path": [
+										"review"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Put/Update Review",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "id",
+											"value": "6526a5b92385a3f5d55f8526",
+											"type": "text"
+										},
+										{
+											"key": "name",
+											"value": "Lise A",
+											"type": "text"
+										},
+										{
+											"key": "description",
+											"value": "test description",
+											"type": "text"
+										},
+										{
+											"key": "file",
+											"type": "file",
+											"src": "/C:/MCDM_Arsenalet/One Day Viborg/materialer/Moments/2024 Jamal/image002.jpg"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{server_path}}/review",
+									"host": [
+										"{{server_path}}"
+									],
+									"path": [
+										"review"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Review By Id",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{server_path}}/review/66f66f86c24eeb5da74a15c1",
+									"host": [
+										"{{server_path}}"
+									],
+									"path": [
+										"review",
+										"66f66f86c24eeb5da74a15c1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Stays",
+			"item": [
+				{
+					"name": "Stays",
+					"item": [
+						{
+							"name": "Stays",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{server_path}}/stays",
+									"host": [
+										"{{server_path}}"
+									],
+									"path": [
+										"stays"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Stay",
+					"item": [
+						{
+							"name": "Post Stay",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "title",
+											"value": "Et stay",
+											"type": "text"
+										},
+										{
+											"key": "description",
+											"value": "En Beskrivelse af et ophold",
+											"type": "text"
+										},
+										{
+											"key": "numberOfPersons",
+											"value": "\"2-4\"",
+											"type": "text"
+										},
+										{
+											"key": "file",
+											"type": "file",
+											"src": "/C:/MCDM_Arsenalet/One Day Viborg/materialer/Willbeck.jpg"
+										},
+										{
+											"key": "price",
+											"value": "2000",
+											"type": "text"
+										},
+										{
+											"key": "includes",
+											"value": "Morgenmad,Frokost,Aftensmad,Adgang til cykler,2 Kanobilletter,Optændingsbrikker til bål,Snobrødsdej,Godteposer til børnene",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{server_path}}/stay",
+									"host": [
+										"{{server_path}}"
+									],
+									"path": [
+										"stay"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Stay",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "id",
+											"value": "66f6730ec24eeb5da74a15d7",
+											"type": "text"
+										},
+										{
+											"key": "title",
+											"value": "Et stay - Opdateret fra postman",
+											"type": "text"
+										},
+										{
+											"key": "description",
+											"value": "En Beskrivelse af et ophold",
+											"type": "text"
+										},
+										{
+											"key": "numberOfPersons",
+											"value": "\"2-4\"",
+											"type": "text"
+										},
+										{
+											"key": "file",
+											"type": "file",
+											"src": "/C:/MCDM_Arsenalet/One Day Viborg/materialer/Willbeck.jpg",
+											"disabled": true
+										},
+										{
+											"key": "price",
+											"value": "2000",
+											"type": "text"
+										},
+										{
+											"key": "includes",
+											"value": "Morgenmad,Frokost,Aftensmad,Adgang til cykler,2 Kanobilletter,Optændingsbrikker til bål,Snobrødsdej,Godteposer til børnene",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{server_path}}/stay",
+									"host": [
+										"{{server_path}}"
+									],
+									"path": [
+										"stay"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Stay By Id",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{server_path}}/stay/66f6730ec24eeb5da74a15d7",
+									"host": [
+										"{{server_path}}"
+									],
+									"path": [
+										"stay",
+										"66f6730ec24eeb5da74a15d7"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Stay By Id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{server_path}}/stay/66f6692d51229f31e095097d",
+									"host": [
+										"{{server_path}}"
+									],
+									"path": [
+										"stay",
+										"66f6692d51229f31e095097d"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Activities",
+			"item": [
+				{
+					"name": "Activities",
+					"item": [
+						{
+							"name": "Activities",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{server_path}}/activities",
+									"host": [
+										"{{server_path}}"
+									],
+									"path": [
+										"activities"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Activity",
+					"item": [
+						{
+							"name": "Activity By Id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{server_path}}/activity/66f66a67189d0e2aac28f2fe",
+									"host": [
+										"{{server_path}}"
+									],
+									"path": [
+										"activity",
+										"66f66a67189d0e2aac28f2fe"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Post Activity",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "title",
+											"value": "En aktivitet",
+											"type": "text"
+										},
+										{
+											"key": "description",
+											"value": "En Beskrivelse af en aktivitet",
+											"type": "text"
+										},
+										{
+											"key": "date",
+											"value": "Mandage",
+											"type": "text"
+										},
+										{
+											"key": "file",
+											"type": "file",
+											"src": "/C:/MCDM_Arsenalet/One Day Viborg/materialer/Willbeck.jpg"
+										},
+										{
+											"key": "time",
+											"value": "18:00-19:00",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{server_path}}/activity",
+									"host": [
+										"{{server_path}}"
+									],
+									"path": [
+										"activity"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Put Activity",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "title",
+											"value": "En opdatering af en aktivitet",
+											"type": "text"
+										},
+										{
+											"key": "description",
+											"value": "En Beskrivelse af en aktivitet",
+											"type": "text"
+										},
+										{
+											"key": "date",
+											"value": "Mandage",
+											"type": "text"
+										},
+										{
+											"key": "file",
+											"type": "file",
+											"src": "/C:/MCDM_Arsenalet/One Day Viborg/materialer/Willbeck.jpg"
+										},
+										{
+											"key": "time",
+											"value": "18:00-19:00",
+											"type": "text"
+										},
+										{
+											"key": "id",
+											"value": "67bc45199563813a79e38d2d",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{server_path}}/activity",
+									"host": [
+										"{{server_path}}"
+									],
+									"path": [
+										"activity"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Activity By Id",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{server_path}}/activity/67bc45199563813a79e38d2d",
+									"host": [
+										"{{server_path}}"
+									],
+									"path": [
+										"activity",
+										"67bc45199563813a79e38d2d"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Contacts",
+			"item": [
+				{
+					"name": "Contacts",
+					"item": [
+						{
+							"name": "Contacts",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{server_path}}/contacts",
+									"host": [
+										"{{server_path}}"
+									],
+									"path": [
+										"contacts"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Contact",
+					"item": [
+						{
+							"name": "Add Contact",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "Postman",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "postman@mediacollege.dk",
+											"type": "text"
+										},
+										{
+											"key": "message",
+											"value": "En besked fra postman",
+											"type": "text"
+										},
+										{
+											"key": "subject",
+											"value": "question",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{server_path}}/contact",
+									"host": [
+										"{{server_path}}"
+									],
+									"path": [
+										"contact"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Contact",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{server_path}}/contact/67d7db9d31c4d07f350f1ec8",
+									"host": [
+										"{{server_path}}"
+									],
+									"path": [
+										"contact",
+										"67d7db9d31c4d07f350f1ec8"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "MyLists",
+			"item": [
+				{
+					"name": "MyList",
+					"item": [
+						{
+							"name": "Save List",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "activityIds",
+											"value": "66f314ecc4e04cf76ca03f73, 66f314ecc4e04cf76ca03f73",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "postman@mediacollege.dk",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{server_path}}/mylist/save",
+									"host": [
+										"{{server_path}}"
+									],
+									"path": [
+										"mylist",
+										"save"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "server_path",
+			"value": "http://localhost:3042",
+			"type": "default"
+		}
+	]
+}

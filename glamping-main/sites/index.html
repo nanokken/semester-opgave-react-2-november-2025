@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="da">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>API Index</title>
+    <style>
+      :root {
+        --bg: #0b1220;
+        --card: #121a2b;
+        --muted: #9fb0d9;
+        --acc: #5aa9e6;
+        --text: #e9eefc;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        padding: 32px;
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica,
+          Arial, sans-serif;
+        background: radial-gradient(
+          1200px 800px at 80% -10%,
+          #12203a 0%,
+          #0b1220 60%,
+          #080d18 100%
+        );
+        color: var(--text);
+      }
+      header {
+        max-width: 900px;
+        margin: 0 auto 24px auto;
+      }
+      h1 {
+        margin: 0 0 8px 0;
+        font-weight: 700;
+        letter-spacing: 0.2px;
+      }
+      .subtitle {
+        color: var(--muted);
+        margin: 0;
+      }
+      .grid {
+        display: grid;
+        gap: 16px;
+        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+        max-width: 900px;
+        margin: 24px auto;
+      }
+      .card {
+        background: linear-gradient(180deg, #141f36 0%, #101827 100%);
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        border-radius: 14px;
+        padding: 16px 16px 12px;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+      }
+      .card h2 {
+        margin: 0 0 8px 0;
+        font-size: 18px;
+      }
+      .desc {
+        color: var(--muted);
+        font-size: 14px;
+        margin-bottom: 10px;
+      }
+      ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: grid;
+        gap: 8px;
+      }
+      li a {
+        display: inline-block;
+        text-decoration: none;
+        color: var(--text);
+        padding: 6px 10px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 10px;
+        font-size: 14px;
+      }
+      li a:hover {
+        border-color: var(--acc);
+        box-shadow: 0 0 0 3px rgba(90, 169, 230, 0.18) inset;
+      }
+      code {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        font-size: 12px;
+        color: #b9d2ff;
+      }
+      footer {
+        max-width: 900px;
+        margin: 24px auto 0;
+        color: var(--muted);
+        font-size: 13px;
+      }
+      .pill {
+        display: inline-block;
+        padding: 2px 8px;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        border-radius: 999px;
+        margin-left: 8px;
+        font-size: 12px;
+        color: var(--muted);
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Glamping API</h1>
+      <p class="subtitle">
+        Hurtige links til dine vigtigste endpoints. GET-links er klikbare.
+      </p>
+    </header>
+
+    <div class="grid">
+      <!-- Users -->
+      <section class="card">
+        <h2>Users</h2>
+        <p class="desc">Brugere (liste og CRUD).</p>
+        <ul>
+          <li><a href="/users">GET /users</a></li>
+          <li><code>GET /user/:id</code></li>
+          <li><code>POST /user</code></li>
+          <li><code>PUT /user/:id</code></li>
+          <li><code>DELETE /user/:id</code></li>
+        </ul>
+      </section>
+
+      <!-- Products -->
+      <section class="card">
+        <h2>Products</h2>
+        <p class="desc">Produkter (liste og CRUD).</p>
+        <ul>
+          <li><a href="/products">GET /products</a></li>
+          <li><code>GET /product/:id</code></li>
+          <li><code>POST /product</code></li>
+          <li><code>PUT /product/:id</code></li>
+          <li><code>DELETE /product/:id</code></li>
+        </ul>
+      </section>
+
+      <!-- Reviews -->
+      <section class="card">
+        <h2>Reviews</h2>
+        <p class="desc">Anmeldelser (liste og CRUD).</p>
+        <ul>
+          <li><a href="/reviews">GET /reviews</a></li>
+          <li><code>GET /review/:id</code></li>
+          <li><code>POST /review</code></li>
+          <li><code>PUT /review/:id</code></li>
+          <li><code>DELETE /review/:id</code></li>
+        </ul>
+      </section>
+
+      <!-- Q&As -->
+      <section class="card">
+        <h2>Questions and answers</h2>
+        <p class="desc">Spørgsmål &amp; svar.</p>
+        <ul>
+          <li><a href="/qandas">GET /qandas</a></li>
+          <li><code>GET /qanda/:id</code></li>
+          <li><code>POST /qanda</code></li>
+          <li><code>PUT /qanda/:id</code></li>
+          <li><code>DELETE /qanda/:id</code></li>
+        </ul>
+      </section>
+
+      <!-- Orders -->
+      <section class="card">
+        <h2>Orders</h2>
+        <p class="desc">Ordrer</p>
+        <ul>
+          <li><a href="/order">GET /orders</a></li>
+          <li><code>GET /order/:id</code></li>
+          <li><code>POST /order</code></li>
+          <li><code>DELETE /order/:id</code></li>
+        </ul>
+      </section>
+
+      <!-- Subscribers-->
+      <section class="card">
+        <h2>Subscribers</h2>
+        <p class="desc">Subscribers</p>
+        <ul>
+          <li><a href="/subscribers">GET /subscribers</a></li>
+          <li><code>GET /subscriber/:id</code></li>
+          <li><code>POST /subscriber</code></li>
+          <li><code>PUT /subscriber/:id</code></li>
+          <li><code>DELETE /subscriber/:id</code></li>
+        </ul>
+      </section>
+    </div>
+    <footer>
+      Postman:
+      <a
+        target="_blank"
+        href="https://mcdmviborg.postman.co/workspace/webmcdm.dk---Server-Projects~f1ca1e4d-4cb3-49f6-9664-7a010d498024/collection/17346811-4174938a-1f27-4c0a-9331-ebd8f88512c1?action=share&creator=38584738&active-environment=17346811-df546038-5537-4746-a21a-c4be984e28e8"
+        >Postman</a
+      >
+    </footer>
+  </body>
+</html>
