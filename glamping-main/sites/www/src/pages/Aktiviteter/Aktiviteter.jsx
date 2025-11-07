@@ -5,14 +5,22 @@ import {
   Accordion, 
   AccordionSummary, 
   AccordionDetails,
-  CircularProgress 
+  CircularProgress,
+  IconButton,
+  Snackbar,
+  Alert
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { Favorite, FavoriteBorder } from '@mui/icons-material';
 import headerBg from '../../assets/image_00.jpg';
+import { addToFavorites, removeFromFavorites, isFavorite } from '../../utils/favorites';
 
 export default function Aktiviteter() {
   const [activities, setActivities] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [snackbar, setSnackbar] = useState({ open: false, message: '', severity: 'success' });
+  const [favoritesState, setFavoritesState] = useState({});
+  const isLoggedIn = Boolean(localStorage.getItem('authToken'));
 
   useEffect(() => {
     const fetchActivities = async () => {
@@ -31,7 +39,35 @@ export default function Aktiviteter() {
     };
 
     fetchActivities();
+    updateFavoritesState();
   }, []);
+
+  const updateFavoritesState = () => {
+    const newState = {};
+    activities.forEach(activity => {
+      newState[activity._id] = isFavorite('aktiviteter', activity._id);
+    });
+    setFavoritesState(newState);
+  };
+
+  const handleFavoriteToggle = (activity) => {
+    if (!isLoggedIn) {
+      setSnackbar({ open: true, message: 'Du skal være logget ind for at tilføje favoritter', severity: 'warning' });
+      return;
+    }
+
+    const isCurrentlyFavorite = isFavorite('aktiviteter', activity._id);
+    
+    if (isCurrentlyFavorite) {
+      removeFromFavorites('aktiviteter', activity._id);
+      setSnackbar({ open: true, message: 'Fjernet fra favoritter', severity: 'info' });
+    } else {
+      addToFavorites('aktiviteter', activity);
+      setSnackbar({ open: true, message: 'Tilføjet til favoritter', severity: 'success' });
+    }
+    
+    setFavoritesState(prev => ({ ...prev, [activity._id]: !isCurrentlyFavorite }));
+  };
 
   return (
     <Box>
@@ -160,8 +196,32 @@ export default function Aktiviteter() {
                     backgroundColor: "#33626C",
                     padding: "2rem",
                     borderRadius: "0 0 20px 20px",
+                    position: "relative"
                   }}
                 >
+                  {/* Favorite Button */}
+                  {isLoggedIn && (
+                    <IconButton
+                      onClick={() => handleFavoriteToggle(activity)}
+                      sx={{
+                        position: 'absolute',
+                        top: 16,
+                        right: 16,
+                        backgroundColor: 'rgba(255, 255, 255, 0.9)',
+                        zIndex: 1,
+                        '&:hover': {
+                          backgroundColor: 'white',
+                        }
+                      }}
+                    >
+                      {favoritesState[activity._id] ? (
+                        <Favorite sx={{ color: '#ff5252' }} />
+                      ) : (
+                        <FavoriteBorder />
+                      )}
+                    </IconButton>
+                  )}
+
                   {/* Activity Title */}
                   <Typography
                     sx={{
@@ -251,6 +311,18 @@ export default function Aktiviteter() {
           </Box>
         )}
       </Box>
+
+      {/* Snackbar for notifications */}
+      <Snackbar
+        open={snackbar.open}
+        autoHideDuration={3000}
+        onClose={() => setSnackbar({ ...snackbar, open: false })}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+      >
+        <Alert severity={snackbar.severity} sx={{ width: '100%' }}>
+          {snackbar.message}
+        </Alert>
+      </Snackbar>
     </Box>
   );
 }

@@ -1,11 +1,17 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import { Container, Typography, Box, Button } from "@mui/material";
+import { useParams, useNavigate } from "react-router-dom";
+import { Container, Typography, Box, Button, Snackbar, Alert } from "@mui/material";
+import { Favorite, FavoriteBorder } from '@mui/icons-material';
+import { addToFavorites, removeFromFavorites, isFavorite } from '../../utils/favorites';
 
 export default function OpholdDetail() {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [stay, setStay] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [isFavorited, setIsFavorited] = useState(false);
+  const [snackbar, setSnackbar] = useState({ open: false, message: '', severity: 'success' });
+  const isLoggedIn = Boolean(localStorage.getItem('authToken'));
 
   useEffect(() => {
     const fetchStay = async () => {
@@ -37,6 +43,34 @@ export default function OpholdDetail() {
 
     fetchStay();
   }, [id]);
+
+  useEffect(() => {
+    if (stay) {
+      setIsFavorited(isFavorite('ophold', stay._id));
+    }
+  }, [stay]);
+
+  const handleFavoriteToggle = () => {
+    if (!isLoggedIn) {
+      setSnackbar({ open: true, message: 'Du skal være logget ind for at tilføje favoritter', severity: 'warning' });
+      setTimeout(() => navigate('/login'), 2000);
+      return;
+    }
+
+    if (!stay) return;
+
+    const isCurrentlyFavorite = isFavorite('ophold', stay._id);
+    
+    if (isCurrentlyFavorite) {
+      removeFromFavorites('ophold', stay._id);
+      setSnackbar({ open: true, message: 'Fjernet fra Min Liste', severity: 'info' });
+      setIsFavorited(false);
+    } else {
+      addToFavorites('ophold', stay);
+      setSnackbar({ open: true, message: 'Tilføjet til Min Liste', severity: 'success' });
+      setIsFavorited(true);
+    }
+  };
 
   if (loading) {
     return (
@@ -100,10 +134,11 @@ export default function OpholdDetail() {
       <Box
         sx={{
           backgroundColor: "#33626C",
-          
           color: "white",
           py: { xs: 6, md: 8 },
           px: { xs: 3, md: 6 },
+          maxWidth: { xs: '100%', md: '800px' },
+          margin: '0 auto',
         }}
       >
         <Container maxWidth="md">
@@ -170,7 +205,7 @@ export default function OpholdDetail() {
           </Typography>
 
           {/* Book Button */}
-          <Box sx={{ display: "flex", justifyContent: "center" }}>
+          <Box sx={{ display: "flex", justifyContent: "center", gap: 2, flexWrap: 'wrap' }}>
             <Button
               variant="contained"
               sx={{
@@ -189,9 +224,42 @@ export default function OpholdDetail() {
             >
               Book nu
             </Button>
+
+            <Button
+              variant="contained"
+              onClick={handleFavoriteToggle}
+              startIcon={isFavorited ? <Favorite /> : <FavoriteBorder />}
+              sx={{
+                 backgroundColor: "#829B97",
+                color: "white",
+                borderRadius: 10,
+                px: 8,
+                py: 2,
+                fontSize: { xs: "1.2rem", md: "1.5rem" },
+                fontFamily: '"Zen Loop", cursive',
+                textTransform: "none",
+                "&:hover": {
+                  backgroundColor: "#6d8680",
+                },
+              }}
+            >
+              {isFavorited ? 'Fjern fra Min Liste' : 'Tilføj til Min Liste'}
+            </Button>
           </Box>
         </Container>
       </Box>
+
+      {/* Snackbar for notifications */}
+      <Snackbar
+        open={snackbar.open}
+        autoHideDuration={3000}
+        onClose={() => setSnackbar({ ...snackbar, open: false })}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+      >
+        <Alert severity={snackbar.severity} sx={{ width: '100%' }}>
+          {snackbar.message}
+        </Alert>
+      </Snackbar>
     </Box>
   );
 }

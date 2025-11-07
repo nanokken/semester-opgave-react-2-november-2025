@@ -9,13 +9,21 @@ import {
   CardMedia,
   Button,
   Grid,
+  IconButton,
+  Snackbar,
+  Alert,
 } from "@mui/material";
+import { Favorite, FavoriteBorder } from '@mui/icons-material';
 import heroImage from "../../assets/image_01.jpg";
+import { addToFavorites, removeFromFavorites, isFavorite } from '../../utils/favorites';
 
 export default function Ophold() {
   const [stays, setStays] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [snackbar, setSnackbar] = useState({ open: false, message: '', severity: 'success' });
+  const [favoritesState, setFavoritesState] = useState({});
   const navigate = useNavigate();
+  const isLoggedIn = Boolean(localStorage.getItem('authToken'));
 
   useEffect(() => {
     const fetchStays = async () => {
@@ -42,7 +50,35 @@ export default function Ophold() {
     };
 
     fetchStays();
+    updateFavoritesState();
   }, []);
+
+  const updateFavoritesState = () => {
+    const newState = {};
+    stays.forEach(stay => {
+      newState[stay._id] = isFavorite('ophold', stay._id);
+    });
+    setFavoritesState(newState);
+  };
+
+  const handleFavoriteToggle = (stay) => {
+    if (!isLoggedIn) {
+      setSnackbar({ open: true, message: 'Du skal være logget ind for at tilføje favoritter', severity: 'warning' });
+      return;
+    }
+
+    const isCurrentlyFavorite = isFavorite('ophold', stay._id);
+    
+    if (isCurrentlyFavorite) {
+      removeFromFavorites('ophold', stay._id);
+      setSnackbar({ open: true, message: 'Fjernet fra favoritter', severity: 'info' });
+    } else {
+      addToFavorites('ophold', stay);
+      setSnackbar({ open: true, message: 'Tilføjet til favoritter', severity: 'success' });
+    }
+    
+    setFavoritesState(prev => ({ ...prev, [stay._id]: !isCurrentlyFavorite }));
+  };
 
   const handleReadMore = (id) => {
     navigate(`/ophold/${id}`);
@@ -149,12 +185,36 @@ export default function Ophold() {
                 flexDirection: "column",
                 borderRadius: 2,
                 overflow: "hidden",
+                position: "relative",
                 transition: "transform 0.3s ease",
                 "&:hover": {
                   transform: "translateY(-8px)",
                 },
               }}
             >
+              {/* Favorite Button */}
+              {isLoggedIn && (
+                <IconButton
+                  onClick={() => handleFavoriteToggle(stay)}
+                  sx={{
+                    position: 'absolute',
+                    top: 48,
+                    right: 8,
+                    backgroundColor: 'rgba(255, 255, 255, 0.9)',
+                    zIndex: 1,
+                    '&:hover': {
+                      backgroundColor: 'white',
+                    }
+                  }}
+                >
+                  {favoritesState[stay._id] ? (
+                    <Favorite sx={{ color: '#ff5252' }} />
+                  ) : (
+                    <FavoriteBorder />
+                  )}
+                </IconButton>
+              )}
+
               <Typography
                 variant="h5"
                 sx={{
@@ -218,6 +278,18 @@ export default function Ophold() {
           ))}
         </Box>
       </Container>
+
+      {/* Snackbar for notifications */}
+      <Snackbar
+        open={snackbar.open}
+        autoHideDuration={3000}
+        onClose={() => setSnackbar({ ...snackbar, open: false })}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+      >
+        <Alert severity={snackbar.severity} sx={{ width: '100%' }}>
+          {snackbar.message}
+        </Alert>
+      </Snackbar>
     </Box>
   );
 }
