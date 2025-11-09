@@ -49,7 +49,17 @@ export default function Nav() {
     { text: 'Min Liste', path: '/min-liste' }
   ];
 
-  const currentMenuItems = isLoggedIn ? loggedInMenuItems : menuItems;
+  const adminMenuItems = [
+    { text: 'Hjem', path: '/' },
+    { text: 'Ophold', path: '/ophold' },
+    { text: 'Kontakt', path: '/kontakt' },
+    { text: 'Aktiviteter', path: '/aktiviteter' },
+    { text: 'Min Liste', path: '/min-liste' },
+    { text: 'Backoffice', path: '/backoffice' }
+  ];
+
+  const isAdmin = user?.role === 'admin';
+  const currentMenuItems = isAdmin ? adminMenuItems : (isLoggedIn ? loggedInMenuItems : menuItems);
 
   // Check if user is logged in
   useEffect(() => {

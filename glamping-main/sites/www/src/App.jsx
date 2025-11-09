@@ -16,6 +16,7 @@ import Kontakt from "./pages/Kontakt/Kontakt.jsx";
 import Aktiviteter from "./pages/Aktiviteter/Aktiviteter.jsx";
 import LoginPage from "./pages/Login/Login.jsx";
 import MinListe from "./pages/MinListe/MinListe.jsx";
+import Backoffice from "./pages/Backoffice/Backoffice.jsx";
 
 // Components
 import Nav from "./components/Nav/Nav.jsx";
@@ -56,6 +57,7 @@ function AppContent() {
           <Route path="/aktiviteter" element={<PageTransition><Aktiviteter /></PageTransition>} />
           <Route path="/login" element={<PageTransition><LoginPage /></PageTransition>} />
           <Route path="/min-liste" element={<PageTransition><MinListe /></PageTransition>} />
+          <Route path="/backoffice" element={<PageTransition><Backoffice /></PageTransition>} />
         </Routes>
       </AnimatePresence>
       <Footer />
