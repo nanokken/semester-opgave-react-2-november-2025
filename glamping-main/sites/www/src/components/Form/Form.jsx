@@ -70,6 +70,15 @@ export default function Form() {
     // Form is valid, submit the data
     console.log('Form submitted:', formData);
     
+    // Save to localStorage
+    const existingMessages = JSON.parse(localStorage.getItem('contactMessages') || '[]');
+    existingMessages.push({
+      ...formData,
+      timestamp: new Date().toISOString(),
+      id: Date.now()
+    });
+    localStorage.setItem('contactMessages', JSON.stringify(existingMessages));
+    
     // Show success toast
     toast.success('Din besked er blevet sendt successfully!', {
       position: "top-right",
