@@ -84,7 +84,6 @@ export default function Home() {
           variant="h1"
           sx={{
             color: "white",
-            fontFamily: '"Zen Loop", cursive',
             textAlign: "center",
             fontSize: { xs: "3rem", md: "clamp(3rem, 5vw, 4rem)" },
             fontWeight: 300,
@@ -98,7 +97,6 @@ export default function Home() {
           variant="h1"
           sx={{
             color: "white",
-            fontFamily: '"Zen Loop", cursive',
             textAlign: "center",
             fontSize: { xs: "3.5rem", md: "clamp(3.5rem, 5.5vw, 4.5rem)" },
             fontWeight: 300,
